@@ -1,0 +1,746 @@
+/* radiantmaps.co */
+
+:root {
+  /* Optima ships on Apple devices; everyone else gets EB Garamond from /assets/fonts (bottom of this file) */
+  --font: Optima, 'EB Garamond', Georgia, serif;
+  --text: #ad9a7f;
+  --bg: #000;
+  --rule: #4d4230;
+  --radius: 5px;
+  /* evanapplegate.com's paper texture, recoloured; it lags the page by --parallax of the scroll (0 turns it off) */
+  --texture: url(img/texture.webp);
+  --parallax: 0.15;
+}
+@media (max-width: 767px) {
+  :root {
+    --texture: url(img/texture-1200.webp);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  background: var(--bg);
+}
+body {
+  position: relative;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: clip;
+  color: var(--text);
+  font: 14px/1.3 var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+[hidden] {
+  display: none !important;
+}
+img,
+video,
+iframe {
+  display: block;
+  max-width: 100%;
+}
+video {
+  height: auto;
+}
+img {
+  height: auto;
+}
+p,
+h1,
+h2 {
+  margin: 0;
+}
+ul,
+ol {
+  margin: 1em 0;
+  padding-left: 40px;
+}
+:is(ul, ol) :is(ul, ol) {
+  margin: 0;
+}
+h1,
+h2 {
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+a {
+  color: inherit;
+}
+.large {
+  font-size: 18px;
+}
+.center {
+  text-align: center;
+}
+/* the map-making guide (You should make maps) was a custom-code block, where paragraphs keep their margins */
+.guide {
+  overflow-wrap: anywhere;
+}
+.guide p {
+  margin: 1em 0;
+}
+.right {
+  text-align: right;
+}
+
+/* the texture sits on its own layer behind the page so it can drift, as on evanapplegate.com;
+   like the contour lines below, it is added once the page has loaded (site.js) */
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+.bg-ready body::before {
+  background: var(--texture) top left / 100% auto repeat;
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    body::before {
+      animation: bg-parallax 1ms linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+/* 100% is the page height, so the layer ends up shifted by --parallax x scroll distance */
+@keyframes bg-parallax {
+  from {
+    transform: translateY(calc(var(--parallax) * (100vh - 100%)));
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* faint contour lines behind most sections, added once the page has loaded (site.js) */
+.bg-ready .get-lost {
+  background: url(img/get-lost.svg) 50% 0 / cover no-repeat;
+}
+
+/* ---------- header ---------- */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 70px 50px 30px;
+}
+.brand img {
+  width: 120px;
+}
+.menu {
+  display: flex;
+  align-items: center;
+}
+.menu a {
+  margin-right: 27px;
+  letter-spacing: 2px;
+  text-decoration: none;
+}
+.menu .nav-button {
+  margin: 0 0 0 3px; /* 30px after the last link */
+  padding: 5px 10px;
+  border-radius: var(--radius);
+  background: var(--text);
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+.menu-toggle {
+  display: none;
+  padding: 8px 12px;
+  border: 0;
+  background: none;
+  color: var(--text);
+  cursor: pointer;
+}
+.menu-toggle svg {
+  display: block;
+  width: 29px;
+  height: 23px;
+  fill: currentColor;
+}
+@media (max-width: 1023px) {
+  .site-header {
+    padding: 70px 25px 30px;
+  }
+  .brand img {
+    width: 100px;
+  }
+  .menu-toggle {
+    display: block;
+  }
+  .menu {
+    display: none;
+    flex-basis: 100%;
+    flex-direction: column;
+    padding-top: 30px;
+    text-align: center;
+  }
+  .menu-toggle[aria-expanded='true'] + .menu {
+    display: flex;
+  }
+  .menu a {
+    margin: 0 0 20px;
+  }
+  .menu .nav-button {
+    margin: 0 0 13px;
+  }
+}
+@media (max-width: 767px) {
+  .site-header {
+    padding-top: 20px; /* phones: the logo starts where evanapplegate.com's content does */
+  }
+}
+
+/* ---------- grids: Dorik's fluid columns, 10px gutters unless a row says otherwise ---------- */
+/* Spacing between and around blocks comes from the generated utility classes at the end of this file;
+   blocks themselves carry no margins. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  column-gap: 10px;
+  align-items: start;
+}
+.g1 { --n: 1; }
+.g2 { --n: 2; }
+.g3 { --n: 3; }
+.g4 { --n: 4; }
+.g5 { --n: 5; }
+.g6 { --n: 6; }
+.g8 { --n: 8; }
+.g12 { --n: 12; }
+.g16 { --n: 16; }
+.span-2 { grid-column-end: span 2; }
+.span-3 { grid-column-end: span 3; }
+.span-4 { grid-column-end: span 4; }
+.span-5 { grid-column-end: span 5; }
+.span-6 { grid-column-end: span 6; }
+.span-7 { grid-column-end: span 7; }
+.span-8 { grid-column-end: span 8; }
+.span-10 { grid-column-end: span 10; }
+.span-12 { grid-column-end: span 12; }
+.start-2 { grid-column-start: 2; }
+.start-3 { grid-column-start: 3; }
+.start-4 { grid-column-start: 4; }
+.start-5 { grid-column-start: 5; }
+.start-7 { grid-column-start: 7; }
+:where(.grid > div) > * {
+  display: block;
+  margin: 0;
+}
+:where(.grid > div > div) > :first-child {
+  margin-top: 0;
+}
+:where(.grid > div > div) > :last-child {
+  margin-bottom: 0;
+}
+/* Dorik's fixed-width container (only a few rows use it) */
+.contained {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 15px;
+}
+@media (min-width: 640px) { .contained { width: 540px; } }
+@media (min-width: 768px) { .contained { width: 750px; } }
+@media (min-width: 1024px) { .contained { width: 1000px; } }
+@media (min-width: 1280px) { .contained { width: 1140px; } }
+/* below 1024px the columns stack, in reverse order for rows marked so */
+@media (max-width: 1023px) {
+  .grid {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .grid.reverse {
+    flex-direction: column-reverse;
+  }
+}
+.grid hr {
+  height: 18px;
+  border: 0;
+  background: linear-gradient(var(--rule), var(--rule)) 0 9px / 100% 1px no-repeat;
+}
+.grid :is(img, video) {
+  border-radius: var(--radius);
+}
+:where(.grid) :is(img, video) {
+  width: 100%; /* the generated w-* classes override this */
+}
+.grid img.square {
+  border-radius: 0;
+}
+:where(.grid) iframe {
+  width: 100%;
+  height: auto; /* the generated h-* classes override this */
+  aspect-ratio: 16 / 9;
+  border: 0;
+}
+/* home page, stacked (below 1024px): a rule in the text colour under each project's buttons, 30px either side.
+   The next project's own top spacing (its column, or its row and column) is replaced by those 30px. */
+@media (max-width: 1023px) {
+  .projects .grid > div:has(> .button)::after {
+    content: '';
+    display: block;
+    height: 1px;
+    margin-top: 30px;
+    background: var(--text);
+  }
+  .projects .grid > div:has(> .button) + div,
+  .projects .grid:has(> div:last-child > .button) + .grid > div:first-child {
+    padding-top: 30px;
+  }
+  .projects .grid:has(> div:last-child > .button) + .grid {
+    padding-top: 0;
+  }
+}
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: var(--radius);
+  background: var(--text);
+  color: #000;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .hide-phone { display: none !important; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hide-tablet { display: none !important; }
+}
+@media (min-width: 1024px) {
+  .hide-desktop { display: none !important; }
+}
+
+/* image treatments carried over from the Dorik site: colour tone (settings from the generated classes),
+   darken on hover, centred small images */
+.tone {
+  filter: grayscale(var(--grayscale, 0%)) sepia(var(--sepia, 0%)) brightness(var(--brightness, 100%))
+    hue-rotate(var(--hue-rotate, 0deg)) saturate(var(--saturate, 100%));
+}
+.dim {
+  transition: filter 0.5s;
+}
+.dim:hover {
+  filter: brightness(50%);
+}
+.grid img.mx-auto {
+  margin-inline: auto;
+}
+
+/* ---------- forms (Formspree) ---------- */
+.contact {
+  color: #decfb8;
+}
+.contact label {
+  display: block;
+  color: var(--text);
+}
+.contact input,
+.contact textarea {
+  display: block;
+  width: 100%;
+  min-height: 50px;
+  margin: 5px 0 25px;
+  padding: 10px 15px;
+  border: 1px solid var(--text);
+  border-radius: var(--radius);
+  background: #000;
+  color: var(--text);
+  font: 18px/1.15 var(--font);
+}
+.contact button {
+  width: 100%;
+  height: 30px;
+  margin-top: 5px;
+  padding: 0 30px;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--text);
+  color: #000;
+  font: 18px var(--font);
+  cursor: pointer;
+}
+.subscribe {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.subscribe label {
+  flex: 1;
+  margin-right: 15px;
+  padding: 0;
+  color: #171a21;
+  font-size: 16px;
+}
+.subscribe input {
+  height: 33px;
+  min-height: 0;
+  margin: 10px 0 0;
+  padding: 1px 2px 1px 10px;
+  border: 2px solid var(--text);
+  background: #fff;
+  color: #171a21;
+  font-size: 14px;
+}
+.subscribe button {
+  width: auto;
+  height: 33px;
+  margin-top: 0;
+}
+@media (max-width: 767px) {
+  .subscribe {
+    display: block;
+  }
+  .subscribe label {
+    margin-right: 0;
+  }
+  .subscribe button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+.contact button[disabled] {
+  opacity: 0.7;
+  cursor: default;
+}
+.form-success,
+.form-error {
+  display: none;
+  flex-basis: 100%;
+  margin-top: 10px;
+  padding: 10px 15px;
+  border-radius: 3px;
+  background: #fff;
+  text-align: center;
+}
+.form-success {
+  color: #17832d;
+}
+.form-error {
+  color: #ff3a28;
+}
+.form-success[data-fs-active],
+.form-error[data-fs-active] {
+  display: block;
+}
+.field-error {
+  display: none;
+  margin: -20px 0 15px;
+  color: #ff3a28;
+  font-size: 12px;
+}
+.field-error[data-fs-active] {
+  display: block;
+}
+.contact [aria-invalid='true'] {
+  border-color: #ff3a28;
+}
+
+/* ---------- footer ---------- */
+/* spacing and layout come from the generated classes, like the sections above */
+.site-footer p {
+  color: var(--rule);
+}
+.social {
+  display: inline-block;
+  color: var(--rule);
+}
+.social svg {
+  width: 37.5px;
+  height: 30px;
+  fill: currentColor;
+}
+
+/* ---------- fade-in as blocks scroll in (site.js; desktop only) ---------- */
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.reveal-ready [data-reveal='fade-up'] {
+  transform: translateY(100px);
+}
+.reveal-ready [data-reveal].revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* section labels with an icon (You should make maps) */
+.icon-text {
+  display: flex;
+  align-items: center;
+  font-size: 23px;
+}
+.icon-text svg {
+  flex: none;
+  width: 31.25px;
+  height: 25px;
+  margin-right: 5px;
+  fill: currentColor;
+}
+
+/* visually hidden, still read by screen readers and search engines (page headings on pages designed without one) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- spacing from the Dorik site (generated by radiant.py; see measure.py) ---------- */
+.brightness-136pct { --brightness: 136%; }
+.brightness-129pct { --brightness: 129%; }
+.brightness-126pct { --brightness: 126%; }
+.brightness-119pct { --brightness: 119%; }
+.brightness-114pct { --brightness: 114%; }
+.fs-18 { font-size: 18px; }
+.fs-12 { font-size: 12px; }
+.gap-30 { column-gap: 30px; }
+.h-1000 { height: 1000px; }
+.h-825 { height: 825px; }
+.h-700 { height: 700px; }
+.h-40 { height: 40px; }
+.h-30 { height: 30px; }
+.hue-rotate-355deg { --hue-rotate: 355deg; }
+.hue-rotate-351deg { --hue-rotate: 351deg; }
+.mb-40 { margin-bottom: 40px; }
+.mb-5 { margin-bottom: 5px; }
+.ml-50 { margin-left: 50px; }
+.mr-50 { margin-right: 50px; }
+.mr-25 { margin-right: 25px; }
+.mr-10 { margin-right: 10px; }
+.mr-5 { margin-right: 5px; }
+.mt-100 { margin-top: 100px; }
+.mt-80 { margin-top: 80px; }
+.mt-50 { margin-top: 50px; }
+.mt-40 { margin-top: 40px; }
+.mt-38 { margin-top: 38px; }
+.mt-34 { margin-top: 34px; }
+.mt-18 { margin-top: 18px; }
+.mt-17 { margin-top: 17px; }
+.mt-14 { margin-top: 14px; }
+.mt-10 { margin-top: 10px; }
+.mt-5 { margin-top: 5px; }
+.mt-4 { margin-top: 4px; }
+.mt-n1 { margin-top: -1px; }
+.pb-50 { padding-bottom: 50px; }
+.pb-30 { padding-bottom: 30px; }
+.pb-18 { padding-bottom: 18px; }
+.pb-17 { padding-bottom: 17px; }
+.pb-14 { padding-bottom: 14px; }
+.pb-10 { padding-bottom: 10px; }
+.pb-8 { padding-bottom: 8px; }
+.pb-5 { padding-bottom: 5px; }
+.pl-50 { padding-left: 50px; }
+.pl-5 { padding-left: 5px; }
+.pr-50 { padding-right: 50px; }
+.pr-25 { padding-right: 25px; }
+.pr-5 { padding-right: 5px; }
+.pt-100 { padding-top: 100px; }
+.pt-50 { padding-top: 50px; }
+.pt-40 { padding-top: 40px; }
+.pt-5 { padding-top: 5px; }
+.pt-1 { padding-top: 1px; }
+.saturate-153pct { --saturate: 153%; }
+.saturate-121pct { --saturate: 121%; }
+.saturate-120pct { --saturate: 120%; }
+.saturate-90pct { --saturate: 90%; }
+.saturate-88pct { --saturate: 88%; }
+.saturate-86pct { --saturate: 86%; }
+.saturate-85pct { --saturate: 85%; }
+.saturate-78pct { --saturate: 78%; }
+.sepia-58pct { --sepia: 58%; }
+.sepia-57pct { --sepia: 57%; }
+.sepia-44pct { --sepia: 44%; }
+.sepia-41pct { --sepia: 41%; }
+.sepia-38pct { --sepia: 38%; }
+.sepia-37pct { --sepia: 37%; }
+.sepia-30pct { --sepia: 30%; }
+.sepia-28pct { --sepia: 28%; }
+.sepia-23pct { --sepia: 23%; }
+.text-center { text-align: center; }
+.w-200 { width: 200px; }
+.w-20pct { width: 20%; }
+@media (max-width: 1023px) {
+  .md-ml-50 { margin-left: 50px; }
+  .md-mr-50 { margin-right: 50px; }
+  .md-mr-25 { margin-right: 25px; }
+  .md-mr-5 { margin-right: 5px; }
+  .md-mt-30 { margin-top: 30px; }
+  .md-mt-18 { margin-top: 18px; }
+  .md-mt-17 { margin-top: 17px; }
+  .md-mt-14 { margin-top: 14px; }
+  .md-mt-10 { margin-top: 10px; }
+  .md-mt-4 { margin-top: 4px; }
+  .md-mt-0 { margin-top: 0; }
+  .md-pb-17 { padding-bottom: 17px; }
+  .md-pb-14 { padding-bottom: 14px; }
+  .md-pb-5 { padding-bottom: 5px; }
+  .md-pl-50 { padding-left: 50px; }
+  .md-pl-5 { padding-left: 5px; }
+  .md-pr-50 { padding-right: 50px; }
+  .md-pr-25 { padding-right: 25px; }
+  .md-pr-5 { padding-right: 5px; }
+  .md-pt-40 { padding-top: 40px; }
+}
+@media (max-width: 767px) {
+  .sm-h-600 { height: 600px; }
+  .sm-h-450 { height: 450px; }
+  .sm-mb-51 { margin-bottom: 51px; }
+  .sm-ml-25 { margin-left: 25px; }
+  .sm-mr-25 { margin-right: 25px; }
+  .sm-mt-30 { margin-top: 30px; }
+  .sm-mt-25 { margin-top: 25px; }
+  .sm-mt-14 { margin-top: 14px; }
+  .sm-mt-10 { margin-top: 10px; }
+  .sm-mt-0 { margin-top: 0; }
+  .sm-pb-1 { padding-bottom: 1px; }
+  .sm-pl-25 { padding-left: 25px; }
+  .sm-pl-20 { padding-left: 20px; }
+  .sm-pr-25 { padding-right: 25px; }
+  .sm-pr-20 { padding-right: 20px; }
+  .sm-pt-40 { padding-top: 40px; }
+  .sm-pt-29 { padding-top: 29px; }
+  .sm-pt-25 { padding-top: 25px; }
+  .sm-pt-20 { padding-top: 20px; }
+  .sm-pt-1 { padding-top: 1px; }
+  .sm-pt-0 { padding-top: 0; }
+  .sm-w-auto { width: auto; }
+}
+
+/* EB Garamond (SIL Open Font License), weights 400-800, regular and italic.
+   Only downloaded where Optima is missing (Windows, Android); browsers fetch just the subsets a page uses. */
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(fonts/eb-garamond-normal-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(fonts/eb-garamond-normal-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(fonts/eb-garamond-normal-vietnamese.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(fonts/eb-garamond-normal-greek.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(fonts/eb-garamond-normal-greek-ext.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(fonts/eb-garamond-normal-cyrillic.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(fonts/eb-garamond-normal-cyrillic-ext.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(fonts/eb-garamond-italic-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(fonts/eb-garamond-italic-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(fonts/eb-garamond-italic-vietnamese.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(fonts/eb-garamond-italic-greek.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(fonts/eb-garamond-italic-greek-ext.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(fonts/eb-garamond-italic-cyrillic.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(fonts/eb-garamond-italic-cyrillic-ext.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}

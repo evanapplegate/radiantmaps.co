@@ -1,0 +1,32 @@
+# Radiant Maps
+
+> Radiant Maps makes ultra-detailed, LED-backlit sculptural maps: historic and custom maps printed at 3,600 DPI on film and lit from behind, by cartographer Evan Applegate. Sizes range from 9x12 inches to 20x30 feet; prints are sold on Etsy and custom work is by commission.
+
+Run by cartographer Evan Applegate (https://evanapplegate.com/). Contact: info@radiantmaps.co. Instagram: https://instagram.com/radiantmaps
+
+## Maps
+
+- [The Hudson River Valley, 1960s](https://radiantmaps.co/hudson-valley/): A 48x72-inch illuminated map of the Hudson River Valley, tiled from 42 U.S. Geological Survey 1:24,000 topographic maps and LED-backlit at 3,600 DPI.
+- [Los Angeles Vegetation, 2018](https://radiantmaps.co/LA-vegetation/): A 12x16-inch illuminated map of the plants of Los Angeles by Evan Applegate, with illustrations by Ezra Butt.
+- [Lake Tahoe Bathymetry](https://radiantmaps.co/tahoe-bathymetry/): A 9x12x2-inch illuminated map of the depths of Lake Tahoe by Evan Applegate, set in U.S. Forest Service topographic maps.
+- [Tahoe's Forests](https://radiantmaps.co/tahoe-forests/): A six-foot illuminated map of the Lake Tahoe region built from 45 U.S. Forest Service topographic maps covering 2,400 square miles of four National Forests.
+- [Best Coast, 2017](https://radiantmaps.co/best-coast/): A 36x48-inch illuminated relief map of California by Evan Applegate, from NED elevation and NLCD land cover data, printed on film and backlit.
+- [The City of New York, 1883](https://radiantmaps.co/nyc-1883/): A 16x20-inch illuminated print of Parsons & Atwater's 1883 bird's-eye view of New York, published by Currier & Ives.
+- [New York City, 1977](https://radiantmaps.co/nyc-1977/): A 24x34-inch illuminated map of New York City made from nine 1970s U.S. Geological Survey 1:24,000 topographic maps.
+- [Plan de Paris, 1739](https://radiantmaps.co/paris-1739/): A 48x72-inch illuminated print of the 1739 Turgot map of Paris, drawn by Louis Bretez and engraved by Claude Lucas.
+- [Trees of the Tongass National Forest, 2018](https://radiantmaps.co/tongass-national-forest/): A 12x16-inch illuminated map of the Tongass, the largest intact temperate rainforest on Earth, by Evan Applegate, hand-lettered by Ezra Butt.
+- [The Americas, 2022](https://radiantmaps.co/the-americas/): A 4x6-foot, nine-panel LED-backlit map of the Americas commissioned for a Manhattan office, with labels by Tom Patterson.
+
+## About
+
+- [Radiant Maps](https://radiantmaps.co/): Ultra-detailed, LED-backlit sculptural maps by cartographer Evan Applegate: historic and custom maps printed at 3,600 DPI, from 9x12 inches to 20x30 feet.
+- [FAQ](https://radiantmaps.co/FAQ/): What illuminated maps are, where to get one, who makes them, and why old maps look so good: answers from cartographer Evan Applegate.
+- [Contact](https://radiantmaps.co/contact/): Get in touch to buy an illuminated map or commission a custom LED-backlit map.
+- [Lookbook](https://radiantmaps.co/lookbook/): The Radiant Maps lookbook: a running feed of maps and map details.
+- [You Should Make Maps](https://radiantmaps.co/you-should-make-maps/): Cartographer Evan Applegate's notes on making beautiful maps: QGIS and GDAL setup, data sources, map design, tutorials and inspiration.
+
+## Related
+
+- [Evan Applegate](https://evanapplegate.com/): the cartographer behind these sites
+- [The Map Consultancy](https://themapconsultancy.com/): maps and GIS for organizations
+- [Very Expensive Maps](https://veryexpensivemaps.com/): podcast interviewing cartographers

@@ -6,7 +6,7 @@
   --text: #ad9a7f;
   --bg: #000;
   --rule: #4d4230;
-  --radius: 5px;
+  --radius: 2px; /* every corner: pictures, buttons, cards, form fields (as on physical.evanapplegate.com) */
   /* evanapplegate.com's paper texture, recoloured; it lags the page by --parallax of the scroll (0 turns it off) */
   --texture: url(img/texture.webp);
   --parallax: 0.15;
@@ -438,7 +438,7 @@ body::before {
   flex-basis: 100%;
   margin-top: 10px;
   padding: 10px 15px;
-  border-radius: 3px;
+  border-radius: var(--radius);
   background: #fff;
   text-align: center;
 }

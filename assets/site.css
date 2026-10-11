@@ -122,8 +122,19 @@ body::before {
   }
 }
 
-/* faint contour lines behind most sections, added once the page has loaded (site.js) */
-.bg-ready .get-lost {
+/* faint contour lines behind most sections, added once the page has loaded (site.js). Drawn on a ::before layer,
+   like the texture, so the browser doesn't count the late-loading decoration as the page's main content. */
+.get-lost {
+  position: relative;
+}
+.get-lost::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.bg-ready .get-lost::before {
   background: url(img/get-lost.svg) 50% 0 / cover no-repeat;
 }
 

@@ -627,7 +627,7 @@ body::before {
   .sm-pt-20 { padding-top: 20px; }
   .sm-pt-1 { padding-top: 1px; }
   .sm-pt-0 { padding-top: 0; }
-  .sm-w-auto { width: auto; }
+  .sm-w-100pct { width: 100%; }
 }
 
 /* EB Garamond (SIL Open Font License), weights 400-800, regular and italic.

@@ -24,7 +24,7 @@
   <meta name="author" content="Evan Applegate">
   <link rel="alternate" type="text/markdown" title="llms.txt" href="/llms.txt">
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://evanapplegate.com/#person","name":"Evan Applegate","jobTitle":"Cartographer","url":"https://evanapplegate.com/"},{"@type":"Organization","@id":"https://radiantmaps.co/#org","name":"Radiant Maps","url":"https://radiantmaps.co/","logo":"https://radiantmaps.co/assets/img/radiant_maps_logo_2-01_ug6l2n8a.svg","email":"info@radiantmaps.co","description":"Radiant Maps makes ultra-detailed, LED-backlit sculptural maps: historic and custom maps printed at 3,600 DPI on film and lit from behind, by cartographer Evan Applegate. Sizes range from 9x12 inches to 20x30 feet; prints are sold on Etsy and custom work is by commission.","founder":{"@id":"https://evanapplegate.com/#person"},"sameAs":["https://instagram.com/radiantmaps"]},{"@type":"WebSite","@id":"https://radiantmaps.co/#website","url":"https://radiantmaps.co/","name":"Radiant Maps","description":"Radiant Maps makes ultra-detailed, LED-backlit sculptural maps: historic and custom maps printed at 3,600 DPI on film and lit from behind, by cartographer Evan Applegate. Sizes range from 9x12 inches to 20x30 feet; prints are sold on Etsy and custom work is by commission.","publisher":{"@id":"https://radiantmaps.co/#org"}},{"@type":"ContactPage","@id":"https://radiantmaps.co/contact/#page","url":"https://radiantmaps.co/contact/","name":"Contact | Radiant Maps","description":"Get in touch to buy an illuminated map or commission a custom LED-backlit map.","isPartOf":{"@id":"https://radiantmaps.co/#website"},"inLanguage":"en"}]}</script>
-  <script src="/assets/formspree.js" defer></script>
+  <script src="/assets/form.js" defer></script>
   <script src="/assets/site.js" defer></script>
 </head>
 <body>
@@ -48,7 +48,7 @@
       <p class="mt-34">Get in touch to discuss your map.<br><br>If you have an NDA, send it to info[at]radiantmaps.co</p>
     </div>
     <div class="span-4 mr-50 sm-mr-25 sm-ml-25">
-      <form class="contact" action="https://formspree.io/f/xljdqvqd" method="POST">
+      <form class="contact" action="https://radiantmaps.co/api/contact" method="POST">
         <input type="hidden" name="_subject" value="Radiant Maps inquiry">
         <label>Your email<input type="email" name="email" required placeholder="Enter your email" autocomplete="email" data-fs-field></label>
         <span class="field-error" data-fs-error="email"></span>
@@ -74,16 +74,6 @@
     </div>
   </div>
 </footer>
-<script>
-  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
-  formspree('initForm', { formElement: '.contact', formId: 'xljdqvqd', useDefaultStyles: false, onSuccess: function () { location.href = '/thank-you/'; } });
-  if (!window.fsBlocked) {  // addresses at these domains (or their subdomains) are refused before sending
-    window.fsBlocked = /@(?:[^@]*\.)?(?:hotmail\.com|mail\.ru)$/i;
-    document.addEventListener('input', function (e) {
-      var i = e.target;
-      if (i.type === 'email') i.setCustomValidity(fsBlocked.test(i.value.trim()) ? 'Please use a different email address.' : '');
-    });
-  }
-</script>
+<script>window.formRedirect = '/thank-you/';</script>
 </body>
 </html>

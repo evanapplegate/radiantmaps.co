@@ -29,4 +29,3 @@ Run by cartographer Evan Applegate (https://evanapplegate.com/). Contact: info@r
 
 - [Evan Applegate](https://evanapplegate.com/): the cartographer behind these sites
 - [The Map Consultancy](https://themapconsultancy.com/): maps and GIS for organizations
-- [Very Expensive Maps](https://veryexpensivemaps.com/): podcast interviewing cartographers

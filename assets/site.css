@@ -531,12 +531,6 @@ body::before {
   box-shadow: none;
   color: #000;
 }
-@media (pointer: coarse) {
-  .mouse-only { display: none; }
-}
-@media (pointer: fine), (hover: hover) {
-  .touch-only { display: none; }
-}
 .sizes {
   margin-bottom: 0;
   padding: 0;

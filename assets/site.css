@@ -508,12 +508,15 @@ body::before {
 }
 
 /* ---------- pricing: every size on a 3D wall (pricing/src/main.js draws it) ---------- */
+.finishes-head {
+  margin: 0 0 8px;
+}
 .finishes {
   display: grid;
   gap: 10px;
 }
 .finishes button {
-  height: 40px;
+  height: 20px;
   padding: 0 6px;
   border: 0;
   border-radius: var(--radius);

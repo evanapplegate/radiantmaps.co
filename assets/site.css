@@ -620,6 +620,13 @@ body::before {
   margin-top: 4px;
   color: #decfb8;
 }
+.scene-label.tiny { /* half size, where the full size would crowd */
+  padding: 1px 4px 2px;
+  font-size: 6px;
+}
+.scene-label.tiny .scene-price {
+  margin-top: 2px;
+}
 .scene-label.crowded {
   visibility: hidden !important;
 }
@@ -669,8 +676,29 @@ body::before {
 .specs tbody tr:last-child :is(th, td) {
   border-bottom: 0;
 }
+.contact-button {
+  height: 20px;
+}
 .contact-button:hover {
   background: #c4b295;
+}
+/* stacked above the wall (tablets, phones): the finishes beside the sizes */
+@media (max-width: 1023px) {
+  .pricing-picks {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 15px;
+    align-items: start;
+  }
+  .pricing-picks > .sizes {
+    margin-top: 0;
+  }
+  .pricing-picks .finishes button {
+    height: auto;
+    min-height: 23px;
+    padding: 3px 6px;
+    line-height: 1.15;
+  }
 }
 /* the price table and the specs side by side under the scene, stacked below 1024px */
 .price-cols {

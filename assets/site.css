@@ -690,7 +690,12 @@ body::before {
     margin-top: 34px;
   }
 }
-/* stacked under the sidebar on tablets: line up with its 50px inset */
+/* stacked under the sidebar below 1024px: a gap above the scene, and on tablets the sidebar's 50px inset */
+@media (max-width: 1023px) {
+  .pricing-main {
+    margin-top: 34px;
+  }
+}
 @media (min-width: 768px) and (max-width: 1023px) {
   .pricing-main {
     margin-left: 50px;

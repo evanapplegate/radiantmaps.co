@@ -507,6 +507,141 @@ body::before {
   fill: currentColor;
 }
 
+/* ---------- pricing: every size on a 3D wall (pricing/src/main.js draws it) ---------- */
+.finishes {
+  display: grid;
+  gap: 10px;
+}
+.finishes button {
+  height: 40px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: var(--radius);
+  background: none;
+  box-shadow: inset 0 0 0 1px var(--rule);
+  color: var(--text);
+  font: 12px var(--font);
+  cursor: pointer;
+}
+.finishes button:hover {
+  box-shadow: inset 0 0 0 1px var(--text);
+}
+.finishes button[aria-pressed='true'] {
+  background: var(--text);
+  box-shadow: none;
+  color: #000;
+}
+@media (pointer: coarse) {
+  .mouse-only { display: none; }
+}
+@media (pointer: fine), (hover: hover) {
+  .touch-only { display: none; }
+}
+.scene {
+  position: relative;
+  width: 100%;
+  max-height: calc(100vh - 40px);
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: #060403;
+}
+@media (max-width: 767px) {
+  .scene { aspect-ratio: 1; }
+}
+.scene canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.scene-labels {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.scene-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 2px 4px 5px;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font: 12px/1 var(--font);
+  white-space: nowrap;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.scene-label:hover {
+  color: #decfb8;
+}
+.scene-row {
+  font-size: 14px;
+}
+.scene-price {
+  display: block;
+  margin-top: 4px;
+  color: #decfb8;
+}
+.scene-label.crowded {
+  visibility: hidden !important;
+}
+.scene-all {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  border: 0;
+  font: 14px var(--font);
+  cursor: pointer;
+}
+.prices {
+  display: table; /* not the block every grid child gets */
+  width: 100%;
+  border-collapse: collapse;
+}
+.prices th,
+.prices td {
+  padding: 7px 0 7px 10px;
+  border-bottom: 1px solid var(--rule);
+  font-weight: 400;
+  text-align: right;
+  vertical-align: bottom;
+}
+.prices :is(th, td):first-child {
+  padding-left: 0;
+  text-align: left;
+}
+.prices tbody th,
+.prices td {
+  white-space: nowrap;
+}
+.prices .group th {
+  padding-top: 25px;
+  font-size: 18px;
+}
+/* the finish picked above the scene */
+.prices[data-finish='aluminum'] [data-finish='aluminum'],
+.prices[data-finish='brass'] [data-finish='brass'],
+.prices[data-finish='walnut'] [data-finish='walnut'],
+.prices[data-finish='molding'] [data-finish='molding'] {
+  color: #decfb8;
+}
+@media (max-width: 767px) {
+  .prices {
+    font-size: 12px;
+  }
+}
+.scene-failed::after {
+  content: 'This 3D view needs WebGL, which this browser has turned off.';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 25px;
+  text-align: center;
+}
+
 /* visually hidden, still read by screen readers and search engines (page headings on pages designed without one) */
 .sr-only {
   position: absolute;

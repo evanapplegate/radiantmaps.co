@@ -21,6 +21,7 @@ Run by cartographer Evan Applegate (https://evanapplegate.com/). Contact: info@r
 
 - [Radiant Maps](https://radiantmaps.co/): Ultra-detailed, LED-backlit sculptural maps by cartographer Evan Applegate: historic and custom maps printed at 3,600 DPI, from 9x12 inches to 20x30 feet.
 - [FAQ](https://radiantmaps.co/FAQ/): What illuminated maps are, where to get one, who makes them, and why old maps look so good: answers from cartographer Evan Applegate.
+- [Pricing](https://radiantmaps.co/pricing/): Every Radiant Maps size, from 9x12 inches to 4x8 feet, hung to scale on a 3D wall, in black powdercoat aluminum, polished brass, stained walnut or walnut molding frames.
 - [Contact](https://radiantmaps.co/contact/): Get in touch to buy an illuminated map or commission a custom LED-backlit map.
 - [Lookbook](https://radiantmaps.co/lookbook/): The Radiant Maps lookbook: a running feed of maps and map details.
 - [You Should Make Maps](https://radiantmaps.co/you-should-make-maps/): Cartographer Evan Applegate's notes on making beautiful maps: QGIS and GDAL setup, data sources, map design, tutorials and inspiration.

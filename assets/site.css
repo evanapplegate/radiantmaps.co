@@ -630,20 +630,13 @@ body::before {
   position: absolute;
   top: 10px;
   left: 10px;
-  height: 48px;
-  padding: 0 12px;
+  height: 24px;
+  padding: 0 6px;
   border: 1px solid var(--text);
   background: none;
   color: var(--text);
-  font: 28px var(--font);
+  font: 14px var(--font); /* as the sizes list beside it */
   cursor: pointer;
-}
-@media (max-width: 767px) {
-  .scene-all { /* the phone's scene is small: smaller, so it covers less of the map */
-    height: 34px;
-    padding: 0 9px;
-    font-size: 20px;
-  }
 }
 .prices {
   display: table; /* not the block every grid child gets */

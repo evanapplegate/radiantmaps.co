@@ -659,17 +659,6 @@ body::before {
 .prices td {
   white-space: nowrap;
 }
-.prices .group th {
-  padding-top: 25px;
-  font-size: 18px;
-}
-/* the finish picked above the scene */
-.prices[data-finish='aluminum'] [data-finish='aluminum'],
-.prices[data-finish='brass'] [data-finish='brass'],
-.prices[data-finish='walnut'] [data-finish='walnut'],
-.prices[data-finish='molding'] [data-finish='molding'] {
-  color: #decfb8;
-}
 /* the price table and the specs side by side under the scene, stacked below 1024px */
 .price-cols {
   column-gap: 50px;

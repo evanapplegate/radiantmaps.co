@@ -537,6 +537,55 @@ body::before {
 @media (pointer: fine), (hover: hover) {
   .touch-only { display: none; }
 }
+.sizes {
+  margin-bottom: 0;
+  padding: 0;
+  list-style: none;
+}
+.sizes li {
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s;
+}
+.sizes-group {
+  padding: 14px 0 4px;
+  font-size: 18px;
+}
+.sizes-group:first-child {
+  padding-top: 0;
+}
+.sizes-pick {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  padding: 4px 0;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  background: none;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+/* the size being shown: the others fade, here and on the wall */
+.sizes.picking li[data-size]:not(.on) {
+  opacity: 0.35;
+}
+.sizes li.on .sizes-pick {
+  color: #decfb8;
+}
+.sizes-clear {
+  width: 22px;
+  height: 22px;
+  margin-left: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--text);
+  color: #000;
+  font: 16px/1 var(--font);
+  cursor: pointer;
+}
 .scene {
   position: relative;
   width: 100%;
@@ -586,6 +635,12 @@ body::before {
 }
 .scene-label.crowded {
   visibility: hidden !important;
+}
+.scene-label {
+  transition: opacity 0.2s;
+}
+.scene-label.dim {
+  opacity: 0.3;
 }
 .scene-all {
   position: absolute;

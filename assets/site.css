@@ -659,6 +659,9 @@ body::before {
 .prices td {
   white-space: nowrap;
 }
+.prices thead th {
+  font-style: italic;
+}
 /* the price table and the specs side by side under the scene, stacked below 1024px */
 .price-cols {
   column-gap: 50px;

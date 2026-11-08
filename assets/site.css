@@ -695,6 +695,15 @@ body::before {
     line-height: 1.15;
   }
 }
+/* phones: just the finishes over the wall; the price table under it has the sizes */
+@media (max-width: 767px) {
+  .pricing-picks {
+    display: block;
+  }
+  .pricing-picks > .sizes {
+    display: none;
+  }
+}
 /* the price table and the specs side by side under the scene, stacked below 1024px */
 .price-cols {
   column-gap: 50px;

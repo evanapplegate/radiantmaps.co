@@ -615,17 +615,9 @@ body::before {
 .scene-label:hover {
   color: #decfb8;
 }
-.scene-price {
-  display: block;
-  margin-top: 4px;
-  color: #decfb8;
-}
 .scene-label.tiny { /* half size, where the full size would crowd */
   padding: 1px 4px 2px;
   font-size: 6px;
-}
-.scene-label.tiny .scene-price {
-  margin-top: 2px;
 }
 .scene-label.crowded {
   visibility: hidden !important;
@@ -686,12 +678,15 @@ body::before {
 @media (max-width: 1023px) {
   .pricing-picks {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
     column-gap: 15px;
     align-items: start;
   }
   .pricing-picks > .sizes {
     margin-top: 0;
+  }
+  .pricing-picks + .contact-button { /* the one under the specs does */
+    display: none;
   }
   .pricing-picks .finishes button {
     height: auto;

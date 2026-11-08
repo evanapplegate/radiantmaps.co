@@ -541,13 +541,6 @@ body::before {
   align-items: center;
   transition: opacity 0.2s;
 }
-.sizes-group {
-  padding: 14px 0 4px;
-  font-size: 18px;
-}
-.sizes-group:first-child {
-  padding-top: 0;
-}
 .sizes-pick {
   display: flex;
   flex: 1;
@@ -678,6 +671,30 @@ body::before {
 .prices[data-finish='walnut'] [data-finish='walnut'],
 .prices[data-finish='molding'] [data-finish='molding'] {
   color: #decfb8;
+}
+/* the price table and the specs side by side under the scene, stacked below 1024px */
+.price-cols {
+  column-gap: 50px;
+}
+.specs tbody th {
+  padding-right: 15px;
+  vertical-align: top;
+}
+.specs td {
+  white-space: normal;
+  text-align: left;
+  vertical-align: top;
+}
+@media (max-width: 1023px) {
+  .price-cols > .specs {
+    margin-top: 34px;
+  }
+}
+/* stacked under the sidebar on tablets: line up with its 50px inset */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .pricing-main {
+    margin-left: 50px;
+  }
 }
 @media (max-width: 767px) {
   .prices {

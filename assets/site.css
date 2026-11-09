@@ -681,6 +681,7 @@ body::before {
   white-space: nowrap;
 }
 .prices thead th {
+  white-space: nowrap; /* the finishes' headings break where radiant.py breaks them */
   font-style: italic;
   line-height: 12.7px; /* the two-line headings set tight */
 }
@@ -726,6 +727,14 @@ body::before {
 /* the price table and the specs side by side under the scene, stacked below 1024px */
 .price-cols {
   column-gap: 50px;
+}
+@media (min-width: 1024px) {
+  .price-cols { /* halves, unless the price table needs more (its headings don't wrap) */
+    grid-template-columns: minmax(max-content, 1fr) minmax(0, 1fr);
+  }
+  .specs thead th { /* a line lower, level with the price table's two-line headings, so the rules under them line up */
+    padding-top: 19.7px;
+  }
 }
 .specs tbody th {
   padding-right: 15px;

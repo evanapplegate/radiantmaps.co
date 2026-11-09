@@ -534,6 +534,11 @@ body::before {
   box-shadow: none;
   color: #000;
 }
+@media (prefers-reduced-motion: no-preference) {
+  .finishes button { /* the highlight eases in and out */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+}
 .sizes {
   margin-bottom: 0;
   padding: 0;
@@ -639,6 +644,11 @@ body::before {
   color: var(--text);
   font: 14px var(--font); /* as the sizes list beside it */
   cursor: pointer;
+}
+@media (pointer: coarse) {
+  .scene-all-hint { /* no Shift key on touch screens: two fingers pan there */
+    display: none;
+  }
 }
 .prices {
   display: table; /* not the block every grid child gets */

@@ -645,6 +645,15 @@ body::before {
   font: 14px var(--font); /* as the sizes list beside it */
   cursor: pointer;
 }
+.scene-all:hover {
+  background: var(--text);
+  color: #000;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .scene-all { /* the fill eases in and out, as the finish buttons' */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+}
 @media (pointer: coarse) {
   .scene-all-hint { /* no Shift key on touch screens: two fingers pan there */
     display: none;

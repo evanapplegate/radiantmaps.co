@@ -795,14 +795,12 @@ body::before {
 .brightness-126pct { --brightness: 126%; }
 .brightness-119pct { --brightness: 119%; }
 .brightness-114pct { --brightness: 114%; }
-.fs-18 { font-size: 18px; }
 .fs-12 { font-size: 12px; }
 .gap-30 { column-gap: 30px; }
 .h-1000 { height: 1000px; }
 .h-825 { height: 825px; }
 .h-700 { height: 700px; }
 .h-40 { height: 40px; }
-.h-30 { height: 30px; }
 .hue-rotate-355deg { --hue-rotate: 355deg; }
 .hue-rotate-351deg { --hue-rotate: 351deg; }
 .mb-40 { margin-bottom: 40px; }
